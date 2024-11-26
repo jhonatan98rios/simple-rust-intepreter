@@ -2,7 +2,7 @@ mod lexer;
 mod parser;
 mod interpreter;
 
-use lexer::{Lexer}; // Lexer and Token types
+use lexer::Lexer; // Lexer and Token types
 use parser::Parser;         // Parser type
 use interpreter::Interpreter; // Interpreter type
 

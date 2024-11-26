@@ -1,0 +1,51 @@
+# Rust Interpreter
+
+A lightweight interpreter built with Rust, featuring a custom lexer, parser, and interpreter. This project demonstrates how to tokenize input, generate an abstract syntax tree (AST), and evaluate expressions programmatically.
+
+## Features
+
+- **Lexer**: Tokenizes input strings into meaningful tokens.
+- **Parser**: Converts tokens into an Abstract Syntax Tree (AST).
+- **Interpreter**: Evaluates the AST and provides results.
+- **Integration Tests**: End-to-end tests to validate the full workflow.
+
+## Getting Started
+
+Follow these steps to set up and run the project locally.
+
+### Prerequisites
+
+- [Rust](https://www.rust-lang.org/) (latest stable version recommended)
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/your-username/rust-interpreter.git
+cd rust-interpreter
+```
+
+### Run the Tests
+To ensure everything works as expected, run the integration tests:
+
+```bash
+cargo test
+```
+
+Example Usage
+You can integrate the interpreter into your own Rust projects. Here's a quick example:
+
+```rust
+use interpreter::{Lexer, parse, interpret};
+
+fn main() {
+    let input = "3 + 4 * (2 - 1)";
+    let mut lexer = Lexer::new(input);
+    let tokens = lexer.tokenize();
+    let mut parser = Parser::new(tokens);
+    let ast = parser.parse();
+    let interpreter = Interpreter;
+    let result = interpreter.evaluate(&ast);
+
+    println!("Result: {}", result); // Output: Result: 7
+}
+```

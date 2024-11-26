@@ -1,4 +1,4 @@
-use interpreter::{Lexer, Token, Parser, Interpreter};
+use interpreter::{interpret_expression, Lexer, Token};
 
 #[test]
 fn test_lexer_simple_expression() {
@@ -14,19 +14,6 @@ fn test_lexer_simple_expression() {
             Token::EOF,
         ]
     );
-}
-
-fn interpret_expression(input: &str) -> f64 {
-    let mut lexer = Lexer::new(input);
-    let tokens = lexer.tokenize();
-
-    let mut parser = Parser::new(tokens);
-    let ast = parser.parse();
-    
-    let interpreter = Interpreter;
-    let result = interpreter.evaluate(&ast);
-
-    return result;
 }
 
 #[test]

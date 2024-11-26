@@ -1,27 +1,38 @@
 mod lexer;
 mod parser;
 mod interpreter;
+mod repl;
 
 use lexer::Lexer; // Lexer and Token types
 use parser::Parser;         // Parser type
 use interpreter::Interpreter; // Interpreter type
 
+use repl::start_repl;
+
 fn main() {
-    // Example input expression: "3 + 5 * (10 - 2)"
-    let input = "3 + 5 * (10 - 2)";
+    
+    println!("Rust Interpreter");
+    println!("1. Run REPL");
+    println!("2. Evaluate a single expression");
+    println!("3. Exit");
 
-    // Step 1: Lexical Analysis (tokenization)
-    let mut lexer = Lexer::new(input);
-    let tokens = lexer.tokenize();
+    let mut choice = String::new();
+    std::io::stdin().read_line(&mut choice).unwrap();
+    match choice.trim() {
+        "1" => start_repl(),
+        "2" => evaluate_expression(),
+        "3" => println!("Goodbye!"),
+        _ => println!("Invalid choice. Exiting."),
+    }
+}
 
-    // Step 2: Parsing (construct AST)
-    let mut parser = Parser::new(tokens);
-    let ast = parser.parse();
+fn evaluate_expression() {
+    println!("Enter your expression:");
+    let mut input = String::new();
+    std::io::stdin().read_line(&mut input).unwrap();
 
-    // Step 3: Evaluation (compute result)
-    let interpreter = Interpreter;
-    let result = interpreter.evaluate(&ast);
-
-    // Print the result
-    println!("Result: {}", result); // Expected output: 43.0
+    match repl::process_input(input.trim()) {
+        Ok(result) => println!("Result: {}", result),
+        Err(err) => eprintln!("Error: {}", err),
+    }
 }
